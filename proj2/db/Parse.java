@@ -6,6 +6,8 @@ import db.prototying.Readers.Reader;
 import db.prototying.Readers.FileReader;
 import db.prototying.Readers.Storer;
 
+
+import java.nio.charset.MalformedInputException;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -89,8 +91,9 @@ public class Parse {
                 return "ERROR: Empty Table!";
             } catch (AssertionError ae) {
                 return "ERROR: Malformed table!";
-            }
-            return "";
+            } catch (Exception e ) {
+                return "ERROR: loading a malformed table";
+            }return "";
         } else if ((m = STORE_CMD.matcher(query)).matches()) {
             try {
                 storeTable(m.group(1), db.mapOfTables);
@@ -277,7 +280,7 @@ public class Parse {
         String[] conds = rd.readAndSplit(conditions);
         for (String cond : conds){
             String[] readedConditoin= rd.readCondition(cond);
-            if (rd.uniaryFlag(readedConditoin[2])) {
+            if (rd.uniaryFlag(readedConditoin[1])) {
                 temp = uniaryConditionHelper(readedConditoin, temp);
             } else {
                 temp = binaryConditionHelper(readedConditoin, temp);
@@ -290,23 +293,24 @@ public class Parse {
         Column operand0 = processed.getWithoutType(readedConditoin[0]);
         String operand1 = readedConditoin[1];
         String operator = readedConditoin[2];
-        List<Integer> columnToDelete;
-        return null;
+        List<Integer> columnToAdd = Column.columnCondition2(operand0, operand1, operator);
+        Table temp= new MapTable();
+        temp = temp.copyTable(columnToAdd, processed);
+        return temp;
     }
 
     private static Table binaryConditionHelper(String[] readedConditoin, Table processed){
         Column operand0 = processed.getWithoutType(readedConditoin[0]);
         Column operand1 = processed.getWithoutType(readedConditoin[1]);
         String operator = readedConditoin[2];
-        List<Integer> listToDelete = Column.columnCondition(operand0, operand1, operator);
-        for (int index: listToDelete) {
-            processed.removeRow(index);
-        }
-        return processed;
+        Table temp= new MapTable();
+        List<Integer> listToAdd = Column.columnCondition(operand0, operand1, operator);
+        temp = temp.copyTable(listToAdd, processed);
+        return temp;
     }
 
 
-    private static void loadTable(String fileName, Map<String, Table> tables) {
+    private static void loadTable(String fileName, Map<String, Table> tables) throws Exception{
         FileReader r = new FileReader(fileName);
         String[] cols = r.readColumnNames();
         createNewTable(fileName, cols, tables);

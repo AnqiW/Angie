@@ -274,15 +274,4 @@ public class LinkedListDeque<Item> implements List<Item> {
         }
         return false;
     }
-
-    public void elemMinusOne(int index){
-        ItemNode ptr = sentinel.next;
-        while (index != 0) {
-            ptr = ptr.next;
-            index = index - 1;
-        }
-        ptr=ptr.next;
-        Integer num=  (Integer)ptr.elem -1;
-        ptr.elem= (Item) num;
-    }
 }

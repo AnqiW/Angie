@@ -28,4 +28,7 @@ public interface Table {
     void changeTableName(String newName);
 
     void removeRow(int index);
+
+    String name();
+    Table copyTable(List<Integer> listToAdd, Table originalTable);
 }

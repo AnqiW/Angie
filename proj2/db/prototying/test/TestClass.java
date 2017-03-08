@@ -283,4 +283,13 @@ public class TestClass {
 
     }
 
+    @Test
+    public void TestRemoveEntry(){
+        Column test = new Column();
+        for (int i =1; i<6; i++){
+            test.addByIndex(i, "a");
+        }
+        test.removeEntry(2);
+    }
+
 }

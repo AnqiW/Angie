@@ -45,8 +45,6 @@ public interface Map<K, V> extends Iterable<K>{
 
     Iterator<V> valueIterator();
 
-     void keyMinusOne(int index);
-
 }
 
 

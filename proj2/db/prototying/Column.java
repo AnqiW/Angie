@@ -16,42 +16,34 @@ public class Column<Item> {
             Column result = new Column();
             int index = 1;
             for (int i = 0; i < operand0.size(); i++) {
-                if (operand0.get(i).toString().equals("NaN") && (!operator.equals("/"))) {
-                    result.addByIndex(index, operand0.get(0));
-                } else if (operand1.get(i).toString().equals("NaN") && (!operator.equals("/"))) {
-                    result.addByIndex(index, operand1.get(0));
-                } else {
+                try {
+                    result.addByIndex(index, op.operate((Integer) operand0.get(index), (Integer) operand1.get(index)));
+                } catch (ClassCastException e1) {
                     try {
-                        result.addByIndex(index, op.operate((Integer) operand0.get(index), (Integer) operand1.get(index)));
-                    } catch (ClassCastException e1) {
+                        result.addByIndex(index, op.operate((Float) operand0.get(index), (Float) operand1.get(index)));
+                    } catch (ClassCastException e2) {
                         try {
-                            result.addByIndex(index, op.operate((Float) operand0.get(index), (Float) operand1.get(index)));
-                        } catch (ClassCastException e2) {
+                            result.addByIndex(index, op.operate((String) operand0.get(index), (String) operand1.get(index)));
+                        } catch (ClassCastException e3) {
                             try {
-                                result.addByIndex(index, op.operate((String) operand0.get(index), (String) operand1.get(index)));
-                            } catch (ClassCastException e3) {
+                                result.addByIndex(index, op.operate((Float) operand0.get(index), (Integer) operand1.get(index)));
+                            } catch (ClassCastException e4) {
                                 try {
-                                    result.addByIndex(index, op.operate((Float) operand0.get(index), (Integer) operand1.get(index)));
-                                } catch (ClassCastException e4) {
-                                    try {
-                                        result.addByIndex(index, op.operate((Integer) operand0.get(index), (Float) operand1.get(index)));
-                                    } catch (ClassCastException e5) {
-                                        System.out.println("column oprate exception need");
-
-                                    }
+                                    result.addByIndex(index, op.operate((Integer) operand0.get(index), (Float) operand1.get(index)));
+                                } catch (ClassCastException e5) {
+                                    System.out.println("column oprate exception need");
 
                                 }
 
                             }
 
                         }
+
                     }
                 }
-                    index = index + 1;
-
-                }
-                return result;
-
+                index = index + 1;
+            }
+            return result;
         } catch (Exception e) {
             System.out.println("exception needed");
             return null;
@@ -95,15 +87,10 @@ public class Column<Item> {
     }
 
     public void removeEntry(int index) {
+        int size = content.size();
         content.remove(index);
-        for (int i = index+1; i<content.size()+1; i++){
-            indexMinusOne(i);
-        }
     }
 
-    private void indexMinusOne(int index){
-        content.keyMinusOne(index);
-    }
 
     public static List<Integer> columnCondition(Column operand0, Column operand1, String comparotor) {
         List<Integer> result = new LinkedListDeque<>();
@@ -139,7 +126,45 @@ public class Column<Item> {
                     }
 
                 }
-                if (!cmp) {
+                if (cmp) {
+                    result.addLast(index);
+                }
+                index = index + 1;
+            }
+            return result;
+        } catch (Exception e) {
+            System.out.println("exception needed");
+            return null;
+        }
+
+    }
+
+    public static List<Integer> columnCondition2(Column operand0, String operand1, String comparotor) {
+        List<Integer> result = new LinkedListDeque<>();
+        try {
+            Compartor com = new Compartor(comparotor);
+            int index = 1;
+
+            for (int i = 0; i < operand0.size(); i++) {
+                boolean cmp;
+                try {
+                    cmp = com.compare((Integer) operand0.get(index), Integer.parseInt(operand1));
+                } catch (Exception e) {
+                    try {
+                        cmp = com.compare((Float) operand0.get(index), Float.parseFloat(operand1));
+                    } catch (Exception e2) {
+                        try {
+                            cmp = com.compare((String) operand0.get(index), operand1);
+                        } catch (Exception e3) {
+                            try {
+                                cmp = com.compare((Integer) operand0.get(index), Float.parseFloat(operand1));
+                            } catch (Exception e4) {
+                                cmp = com.compare((Float) operand0.get(index), Integer.parseInt(operand1));
+                            }
+                        }
+                    }
+                }
+                if (cmp) {
                     result.addLast(index);
                 }
                 index = index + 1;

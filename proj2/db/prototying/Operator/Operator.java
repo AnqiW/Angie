@@ -1,7 +1,6 @@
 package db.prototying.Operator;
 
 import db.prototying.ClassChecker.ClassChecker;
-import db.prototying.SpecialValues.NaN;
 
 import java.util.Objects;
 
@@ -48,11 +47,7 @@ public class Operator {
         } else if (operator.equals("*")) {
             return op0 * op1;
         } else if (operator.equals("/")) {
-            if(op1.equals(0)){
-                NaN n= new NaN("Integer");
-                return Integer.parseInt(n.getValue());
-            } else{
-            return op0 / op1;}
+            return op0 / op1;
         } else {
             System.out.println("Integer operator exception needed");
         }
@@ -67,11 +62,7 @@ public class Operator {
         } else if (operator.equals("*")) {
             return op0 * op1;
         } else if (operator.equals("/")) {
-            if(op1.equals(0)){
-                NaN n= new NaN("Integer");
-                return Float.parseFloat(n.getValue());
-            } else{
-            return op0 / op1;}
+            return op0 / op1;
         } else {
             System.out.println("Float operator exception needed");
         }
@@ -86,11 +77,7 @@ public class Operator {
         } else if (operator.equals("*")) {
             return op0 * op1;
         } else if (operator.equals("/")) {
-            if(op1.equals(0)){
-                NaN n= new NaN("Integer");
-                return Float.parseFloat(n.getValue());
-            } else{
-            return op0 / op1;}
+            return op0 / op1;
         } else {
             System.out.println("Float Integer operator exception needed");
         }
@@ -105,11 +92,7 @@ public class Operator {
         } else if (operator.equals("*")) {
             return op0 * op1;
         } else if (operator.equals("/")) {
-            if(op1.equals(0)){
-                NaN n= new NaN("Integer");
-                return Float.parseFloat(n.getValue());
-            } else{
-            return op0 / op1;}
+            return op0 / op1;
         } else {
             System.out.println("Integer Float operator exception needed");
         }

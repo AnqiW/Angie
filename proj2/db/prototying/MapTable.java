@@ -30,6 +30,11 @@ public class MapTable implements Table {
     }
 
     @Override
+    public String name(){
+        return name;
+    }
+
+    @Override
     public int numRows() {
         return content.rowNumber();
     }
@@ -95,5 +100,12 @@ public class MapTable implements Table {
         content.removeRow(index);
     }
 
+    @Override
+    public Table copyTable(List<Integer> listToAdd, Table originalTable){
+        this.name = originalTable.name();
+        this.content = this.content.copyMap(listToAdd, originalTable.content());
+        return this;
+
+    }
 
 }

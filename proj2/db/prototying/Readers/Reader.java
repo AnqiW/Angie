@@ -21,4 +21,6 @@ public interface Reader {
     String[] readAndSplit(String condiExpr);
 
     boolean uniaryFlag(String operand1);
+
+    boolean malformedFlah(String row);
 }

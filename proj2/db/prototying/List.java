@@ -34,5 +34,4 @@ public interface List<Item> extends Iterable<Item> {
 
     boolean contains(Item elem);
 
-    void elemMinusOne(int index);
 }

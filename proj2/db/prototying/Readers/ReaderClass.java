@@ -17,6 +17,8 @@ public class ReaderClass implements Reader {
     private static final Pattern CONDITION_EXPR = Pattern.compile("(\\S+)\\s*(>|<|==|>=|<=|!=)\\s*(\\S+)$");
     private static final String AND ="\\s*and\\s*";
     private static final Pattern UNIARY_FLAG = Pattern.compile("[0-9]+\\.[0-9]+|[0-9]+|'\\S+'");
+    private static final Pattern MALFORMED = Pattern.compile("\\S+\\s*(int|string|float)");
+
 
 
 
@@ -106,4 +108,14 @@ public class ReaderClass implements Reader {
         }
         return false;
     }
+
+    @Override
+    public boolean malformedFlah(String row){
+        Matcher m = MALFORMED.matcher(row);
+        if (m.find()){
+            return true;
+        }
+        return false;
+    }
+
 }

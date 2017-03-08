@@ -231,8 +231,22 @@ public class TestDatabase {
     public void TestCondition(){
         Database d = new Database();
         Parse.eval("load t2", d);
-        System.out.println(Parse.eval("select x,z from t2 where x==z", d));
+        System.out.println(Parse.eval("select x from t2 where x>2", d));
     }
+
+    @Test
+    public void Malformed(){
+        Reader rd = new ReaderClass();
+        boolean test = rd.malformedFlah("x int ,z int, x string,z int, x int,z int, x int,z int");
+    }
+
+    @Test
+    public void Malformedload(){
+        Database d = new Database();
+        Parse.eval("load t4",d);
+    }
+
+
 
 }
 

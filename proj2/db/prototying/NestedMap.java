@@ -327,4 +327,18 @@ public class NestedMap<Item> {
             motherMap.get(name).removeEntry(index);
         }
     }
+
+    public NestedMap copyMap(List<Integer> listToCopy, NestedMap originalMap){
+        NestedMap result = new NestedMap(originalMap.names);
+        List<String> originalNames = result.names;
+        int j = 1;
+        for(int index:listToCopy){
+            for (String colName:originalNames){
+                result.get(colName).addByIndex(j, originalMap.get(colName).get(index));
+            }
+            j = j+1;
+            result.numRows = result.numRows+1;
+        }
+        return result;
+    }
 }

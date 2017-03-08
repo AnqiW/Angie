@@ -98,9 +98,5 @@ import static org.junit.Assert.*;
             }
             return keylist;
         }
-
-        public void keyMinusOne(int index){
-            keys.elemMinusOne(index);
-        }
     }
 
