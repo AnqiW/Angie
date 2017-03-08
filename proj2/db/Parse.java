@@ -182,8 +182,13 @@ public class Parse {
         }
         String tableName = m.group(1);
         String values = m.group(2);
+        ReaderClass rc = new ReaderClass();
         Table mutatedTable = tables.get(tableName);
-        mutatedTable.addRow(values);
+        if(rc.readCommaSplit(values).length != mutatedTable.numCols()){
+            throw new AssertionError("ERROR: Malformed insertion");
+        }else {
+            mutatedTable.addRow(values);
+        }
     }
 
     private static String printTable(String name, Map<String, Table> tables) throws Exception {
