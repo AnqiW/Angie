@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="algs4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/algs4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/jh61b.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/junit-4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/stdlib-package.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/stdlib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/algs4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/jh61b.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/stdlib-package.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../boc/javalib/stdlib.jar!/" />
+    </SOURCES>
+  </library>
+</component>
