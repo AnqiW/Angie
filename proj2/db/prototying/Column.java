@@ -16,12 +16,10 @@ public class Column<Item> {
             Column result = new Column();
             int index = 1;
             for (int i = 0; i < operand0.size(); i++) {
-                if (operand0.get(i).toString().equals("NaN")&& (!operator.equals("/"))) {
+                if (operand0.get(i).toString().equals("NaN") && (!operator.equals("/"))) {
                     result.addByIndex(index, operand0.get(0));
-                    index++;
-                } else if (operand1.get(i).toString().equals("NaN")&& (!operator.equals("/"))){
+                } else if (operand1.get(i).toString().equals("NaN") && (!operator.equals("/"))) {
                     result.addByIndex(index, operand1.get(0));
-                    index++;
                 } else {
                     try {
                         result.addByIndex(index, op.operate((Integer) operand0.get(index), (Integer) operand1.get(index)));
@@ -48,10 +46,12 @@ public class Column<Item> {
 
                         }
                     }
-                    index = index + 1;
                 }
-            }
-            return result;
+                    index = index + 1;
+
+                }
+                return result;
+
         } catch (Exception e) {
             System.out.println("exception needed");
             return null;
